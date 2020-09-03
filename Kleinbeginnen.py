@@ -36,13 +36,13 @@ KPIFramework         = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON
 #print(KPIFramework.columns)
 
 columnsdf1 = KPIFramework.columns.tolist()
-columnsdf1.remove('d_level2_id')
+#columnsdf1.remove('d_level2_id')
 columnsdf1.remove('Numerator')
 columnsdf1.remove('Denominator')
 columnsdf1.remove('Numerator_LP')
 columnsdf1.remove('Denominator_LP')
 
-#print(columnsdf1)
+#print(columnsd
 
 KPIFrameworkl1 = KPIFramework.groupby(columnsdf1,as_index=False).agg({'Denominator': 'sum', 'Numerator': 'sum', 'Denominator_LP': 'sum', 'Numerator_LP': 'sum'})
 
@@ -56,7 +56,7 @@ df_list_l1      = [KPIFrameworkl1,d_kpi,d_level0,d_level1]
 
 KPIFrameworkl1.to_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFrameworkl1.xlsx', index=False)
 
-# dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=True)
+# dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=Truf1)e)
 # dff.drop(dff.filter(regex='level2').columns, axis=1, inplace=True)
 
 # dfflevel1 = dff.groupby('d_kpi_id').agg({'Denominator': 'sum', 'Numerator': 'sum'})
