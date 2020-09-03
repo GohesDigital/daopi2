@@ -6,15 +6,24 @@ from dateutil.relativedelta import relativedelta
 from openpyxl.workbook import Workbook
 import numpy as np
 
-engine = create_engine('mysql+pymysql://root:Handschoen92@localhost:3306/kpiframework')
-dbConnection    = engine.connect()
+import requests
+url ="assets/Attributes/d_kpi.csv"
+r = requests.get(url).content
+print(r)
+
+#engine = create_engine('mysql+pymysql://root:Handschoen92@localhost:3306/kpiframework')
+#dbConnection    = engine.connect()
 
 #SQL Retrieve data
 keys            = ['d_kpi_id','d_date_id']##,'d_level0_id','d_level1_id','d_level2_id'
 Facts           = ['f_kpi_test','f_kpi_CoinGecko']
+
+
 #Dataframes Fact
-f_kpi_test       = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi_CoinGecko  = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
+#f_kpi_test       = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
+f_kpi_test         = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
+f_kpi_test         = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
+f_kpi_CoinGecko    = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
 print(f_kpi_test)
 print(f_kpi_CoinGecko)
 f_kpi = pd.concat(Facts)
