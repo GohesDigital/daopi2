@@ -20,5 +20,5 @@ pprint(data)
 with open("KPIAttributes_daopi.json", "w") as outfile:
     json.dump(data, outfile)
 
-df = pd.read_json (r'C:\Users\nickh\PycharmProjects\daopi2\GoogleAPI\KPIAttributes_daopi.json')
+df = pd.read_json (r'/Blockchain industry code/GoogleAPI/KPIAttributes_daopi.json')
 df.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\d_kpi_daopi.csv', index = False)

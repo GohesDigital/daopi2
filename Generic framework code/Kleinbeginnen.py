@@ -31,7 +31,7 @@ ListGrain       = ['int_day','int_month','int_quarter','int_year']
 #KPIFrameworkMonth   = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_MonthName.xlsx'));
 #KPIFrameworkQuarter = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_QuarterName.xlsx'));
 #KPIFrameworkYear    = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_YearName.xlsx'));
-KPIFramework         = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python.csv'));
+KPIFramework         = pd.DataFrame(pd.read_csv(r'/assets/Attributes/KPIFramework_Python.csv'));
 
 #print(KPIFramework.columns)
 
