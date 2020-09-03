@@ -30,6 +30,6 @@ appended_data['d_level2_id'] = 0
 
 f_kpi_CoinGecko = appended_data.rename(columns={"icon": "Numerator"})
 print(f_kpi_CoinGecko)
-f_kpi_CoinGecko.to_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx', index=False)
+#f_kpi_CoinGecko.to_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx', index=False)
 
 #Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id
