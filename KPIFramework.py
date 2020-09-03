@@ -19,13 +19,13 @@ directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/'
 #dbConnection    = engine.connect()
 
 #SQL Retrieve data
-keys            = ['d_kpi_id','d_date_id']##,'d_level0_id','d_level1_id','d_level2_id'
+
 Facts           = ['f_kpi_daopi','f_kpi_CoinGecko']
 
 
 #Dataframes Fact
 #f_kpi_test         = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi               = pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/f_kpi.csv",sep=';');
+f_kpi               = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/f_kpi.csv",sep=';',index_col = False));
 #f_kpi_CoinGecko    = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
 print(f_kpi)
 
@@ -33,18 +33,23 @@ print(f_kpi)
 #print(f_kpi_CoinGecko)
 
 #Dataframes Dimensions/attributes
-d_kpi       = pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/d_kpi.csv",sep=';');
+d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/d_kpi.csv",sep=';',index_col = False));
 print(d_kpi)
 
 #d_kpi           = tmp_d_kpi[['d_kpi_id','Calculation']]
-d_date          = pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/d_date.csv",sep=';');
+d_date          = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/d_date.csv",sep=',',index_col = False));
+
+print(d_date)
+
 #d_date          = pd.read_sql("select d_date_id,full_date,d_date_id as int_day,date_name_eu as DayName,replace(calendar_year_month,'-','') as int_month,LAST_DAY(date_name) as LD_Month,concat(calendar_year,' ',month_name) as MonthName,concat(calendar_year,calendar_quarter) 	as int_quarter,MAKEDATE(YEAR(date_name),1)+ INTERVAL QUARTER(date_name) QUARTER - INTERVAL 1 DAY as LD_Quarter,concat('Q',calendar_quarter,' ',calendar_year) as QuarterName,calendar_year as int_year,calendar_year as YearName,LAST_DAY(DATE_ADD(date_name, INTERVAL 12-MONTH(date_name) MONTH)) as LD_Year from dimensionalmodel.d_date", dbConnection);
 ##d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
 ##d_level1        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL1_ICON_Library.xlsx',sheet_name='1'));
 ##d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL2_ICON_Library.xlsx',sheet_name='1'));
-df_list         = [f_kpi,d_kpi,d_date]#,d_level0,d_level1,d_level2
+df_list         = [f_kpi,d_kpi,d_date]  #,d_level0,d_level1,d_level2
+keys            = ['d_kpi_id','d_date_id']    ##,'d_level0_id','d_level1_id','d_level2_id'
 Grain           = ['full_date','LD_Month','LD_Quarter','LD_Year']
 GrainName       = ['DayName','MonthName','QuarterName','YearName']
+
 
 """
 -Join all reference tables to the dataframe with a loop
@@ -68,10 +73,10 @@ for z,o in zip(Grain,GrainName):
     #print(df.columns)
     grouped_multiple.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_' + str(o) + '.csv')
 
-KPIFrameworkDay     = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_DayName.xlsx'));
-KPIFrameworkMonth   = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_MonthName.xlsx'));
-KPIFrameworkQuarter = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_QuarterName.xlsx'));
-KPIFrameworkYear    = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_YearName.xlsx'));
+KPIFrameworkDay     = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_DayName.csv'));
+KPIFrameworkMonth   = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_MonthName.csv'));
+KPIFrameworkQuarter = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_QuarterName.csv'));
+KPIFrameworkYear    = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python_YearName.csv'));
 
 """
 -Concatenate the files created in previous step and create a new file with all grains concatenated. Distinguish by filtering on column 'grain'
