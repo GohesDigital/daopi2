@@ -17,8 +17,8 @@ data = sheet.get_all_records()
 
 pprint(data)
 
-with open("KPIAttributes.json", "w") as outfile:
+with open("KPIAttributes_daopi.json", "w") as outfile:
     json.dump(data, outfile)
 
-df = pd.read_json (r'C:\Users\nickh\PycharmProjects\daopi2\GoogleAPI\KPIAttributes.json')
-df.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\d_kpi_google.csv', index = False)
+df = pd.read_json (r'C:\Users\nickh\PycharmProjects\daopi2\GoogleAPI\KPIAttributes_daopi.json')
+df.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\d_kpi_daopi.csv', index = False)
