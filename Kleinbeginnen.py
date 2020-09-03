@@ -36,7 +36,7 @@ KPIFramework         = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON
 #print(KPIFramework.columns)
 
 columnsdf1 = KPIFramework.columns.tolist()
-#columnsdf1.remove('d_level2_id')
+columnsdf1.remove('d_level2_id')
 columnsdf1.remove('Numerator')
 columnsdf1.remove('Denominator')
 columnsdf1.remove('Numerator_LP')
