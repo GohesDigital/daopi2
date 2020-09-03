@@ -16,21 +16,20 @@ print(r)
 
 #SQL Retrieve data
 keys            = ['d_kpi_id','d_date_id']##,'d_level0_id','d_level1_id','d_level2_id'
-Facts           = ['f_kpi_test','f_kpi_CoinGecko']
+Facts           = ['f_kpi_daopi','f_kpi_CoinGecko']
 
 
 #Dataframes Fact
 #f_kpi_test       = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi_test         = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi_test         = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
+f_kpi_daopi         = pd.csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\f_kpi_daopi.csv');
 f_kpi_CoinGecko    = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
-print(f_kpi_test)
+print(f_kpi_daopi)
 print(f_kpi_CoinGecko)
 f_kpi = pd.concat(Facts)
 print(f_kpi_CoinGecko)
 
 #Dataframes Dimensions/attributes
-tmp_d_kpi       = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/d_kpi.xlsx',sheet_name='1')); #, columns=['d_kpi_id', 'KPIName'], index_col=0)
+tmp_d_kpi       = pd.DataFrame(pd.read_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\d_kpi.csv')); #, columns=['d_kpi_id', 'KPIName'], index_col=0)
 d_kpi           = tmp_d_kpi[['d_kpi_id']]#,'Calculation'
 d_date          = pd.read_sql("select d_date_id,full_date,d_date_id as int_day,date_name_eu as DayName,replace(calendar_year_month,'-','') as int_month,LAST_DAY(date_name) as LD_Month,concat(calendar_year,' ',month_name) as MonthName,concat(calendar_year,calendar_quarter) 	as int_quarter,MAKEDATE(YEAR(date_name),1)+ INTERVAL QUARTER(date_name) QUARTER - INTERVAL 1 DAY as LD_Quarter,concat('Q',calendar_quarter,' ',calendar_year) as QuarterName,calendar_year as int_year,calendar_year as YearName,LAST_DAY(DATE_ADD(date_name, INTERVAL 12-MONTH(date_name) MONTH)) as LD_Year from dimensionalmodel.d_date", dbConnection);
 ##d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
