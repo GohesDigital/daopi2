@@ -31,7 +31,7 @@ ListGrain       = ['int_day','int_month','int_quarter','int_year']
 #KPIFrameworkMonth   = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_MonthName.xlsx'));
 #KPIFrameworkQuarter = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_QuarterName.xlsx'));
 #KPIFrameworkYear    = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python_YearName.xlsx'));
-KPIFramework         = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFramework_Python.xlsx'));
+KPIFramework         = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFramework_Python.csv'));
 
 #print(KPIFramework.columns)
 
@@ -47,14 +47,14 @@ columnsdf1.remove('Denominator_LP')
 KPIFrameworkl1 = KPIFramework.groupby(columnsdf1,as_index=False).agg({'Denominator': 'sum', 'Numerator': 'sum', 'Denominator_LP': 'sum', 'Numerator_LP': 'sum'})
 
 #KPIFramework    = pd.concat([KPIFrameworkDay, KPIFrameworkMonth,KPIFrameworkQuarter,KPIFrameworkYear])
-d_kpi           = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/d_kpi.xlsx',sheet_name='1'));  #, columns=['d_kpi_id', 'KPIName'], index_col=0)
-d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
-d_level1        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL1_ICON_Library.xlsx',sheet_name='1'));
-d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL2_ICON_Library.xlsx',sheet_name='1'));
+d_kpi           = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/d_kpi.xlsx',sheet_name='1'));  #, columns=['d_kpi_id', 'KPIName'], index_col=0)
+d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
+d_level1        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/LEVEL1_ICON_Library.xlsx',sheet_name='1'));
+d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/LEVEL2_ICON_Library.xlsx',sheet_name='1'));
 df_list         = [KPIFramework,d_kpi,d_level0,d_level1,d_level2] #d_date
 df_list_l1      = [KPIFrameworkl1,d_kpi,d_level0,d_level1]
 
-KPIFrameworkl1.to_excel(r'C:/Users/nick/Documents/ICON KPI analytics/KPIFrameworkl1.xlsx', index=False)
+KPIFrameworkl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/KPIFrameworkL1.csv', index=False)
 
 # dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=Truf1)e)
 # dff.drop(dff.filter(regex='level2').columns, axis=1, inplace=True)
@@ -66,7 +66,7 @@ for i, x in zip(df_list_l1[1:], range(len(keysl1))):
 
 dfl1["Period_int"] = pd.to_datetime(dfl1["Period_int"])
 
-dfl1.to_excel(r'C:/Users/nick/Documents/ICON KPI analytics/dfl1.xlsx', index=False)
+dfl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/dfl1.csv', index=False)
 
 df = df_list[0]
 for i,x in zip(df_list[1:],range(len(keys))):
