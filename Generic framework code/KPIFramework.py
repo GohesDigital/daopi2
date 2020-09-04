@@ -8,12 +8,8 @@ from pprint import pprint
 from openpyxl.workbook import Workbook
 import numpy as np
 
-#import requests
-#url ="assets/Attributes/d_kpi.csv"
-#r = requests.get(url).content
-#print(r)
 
-directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/'
+directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes'
 
 #engine = create_engine('mysql+pymysql://root:Handschoen92@localhost:3306/kpiframework')
 #dbConnection    = engine.connect()
@@ -22,20 +18,19 @@ directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/'
 
 Facts           = ['f_kpi_daopi','f_kpi_CoinGecko']
 
-
 #Dataframes Fact
 #f_kpi_test         = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi               = pd.DataFrame(pd.read_csv("/assets/Attributes/Generic attributes/f_kpi.csv", sep=';', index_col = False));
-#f_kpi_CoinGecko    = pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/f_kpi_CoinGecko.xlsx');
+f_kpi               = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/f_kpi.csv", sep=';', index_col = False));
+f_kpi_daopi         = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Blockchain industry/f_kpi_daopi.csv", sep=';', index_col = False));
 
-#f_kpi = pd.concat(Facts)
-#print(f_kpi_CoinGecko)
+f_kpi = pd.concat(Facts)
+print(f_kpi_CoinGecko)
 
 #Dataframes Dimensions/attributes
-tmp_d_kpi           = pd.DataFrame(pd.read_csv("/assets/Attributes/Generic attributes/d_kpi.csv", sep=';', index_col = False));
+tmp_d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.csv", sep=';', index_col = False));
 
 d_kpi           = tmp_d_kpi[['d_kpi_id','Calculation']];
-d_date          = pd.DataFrame(pd.read_csv("/assets/Attributes/Generic attributes/d_date.csv", sep=',', index_col = False));
+d_date          = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_date.csv", sep=',', index_col = False));
 
 #d_date          = pd.read_sql("select d_date_id,full_date,d_date_id as int_day,date_name_eu as DayName,replace(calendar_year_month,'-','') as int_month,LAST_DAY(date_name) as LD_Month,concat(calendar_year,' ',month_name) as MonthName,concat(calendar_year,calendar_quarter) 	as int_quarter,MAKEDATE(YEAR(date_name),1)+ INTERVAL QUARTER(date_name) QUARTER - INTERVAL 1 DAY as LD_Quarter,concat('Q',calendar_quarter,' ',calendar_year) as QuarterName,calendar_year as int_year,calendar_year as YearName,LAST_DAY(DATE_ADD(date_name, INTERVAL 12-MONTH(date_name) MONTH)) as LD_Year from dimensionalmodel.d_date", dbConnection);
 ##d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nick/Documents/ICON KPI analytics/Attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
@@ -69,10 +64,10 @@ for z,o in zip(Grain,GrainName):
     #print(df.columns)
     grouped_multiple.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python_' + str(o) + '.csv')
 
-KPIFrameworkDay     = pd.DataFrame(pd.read_csv(r'/assets/Attributes/Generic attributes/KPIFramework_Python_DayName.csv'));
-KPIFrameworkMonth   = pd.DataFrame(pd.read_csv(r'/assets/Attributes/Generic attributes/KPIFramework_Python_MonthName.csv'));
-KPIFrameworkQuarter = pd.DataFrame(pd.read_csv(r'/assets/Attributes/Generic attributes/KPIFramework_Python_QuarterName.csv'));
-KPIFrameworkYear    = pd.DataFrame(pd.read_csv(r'/assets/Attributes/Generic attributes/KPIFramework_Python_YearName.csv'));
+KPIFrameworkDay     = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python_DayName.csv'));
+KPIFrameworkMonth   = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python_MonthName.csv'));
+KPIFrameworkQuarter = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python_QuarterName.csv'));
+KPIFrameworkYear    = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python_YearName.csv'));
 
 """
 -Concatenate the files created in previous step and create a new file with all grains concatenated. Distinguish by filtering on column 'grain'
