@@ -2,7 +2,7 @@ from pycoingecko import CoinGeckoAPI
 import json
 import pandas as pd
 cg = CoinGeckoAPI()
-cs_list = ['icon']#,'ethereum','chainlink'
+cs_list = ['icon','ethereum']#,'chainlink'
 #cs_list_id = ['1','2','3']
 
 start_dti = '08, 20, 2020'
@@ -18,15 +18,15 @@ for d in index.strftime('%d-%m-%Y'):
 
         history = pd.DataFrame(data=[{'d_date_id' : str(d),
                                         a: data['market_data']['current_price']['eur']}]).set_index('d_date_id')
-
+        history['d_level0_id'] = str(a)
+        history['Denominator'] = 0
+        history['kpi_id'] = 17
+        history['d_level1_id'] = 0
+        history['d_level2_id'] = 0
         appended_data.append(history)
 
+
 appended_data = pd.concat(appended_data)
-appended_data['Denominator'] = 0
-appended_data['kpi_id'] = 17
-appended_data['d_level0_id'] = 1
-appended_data['d_level1_id'] = 0
-appended_data['d_level2_id'] = 0
 
 #df['DOB']=pd.to_datetime(df['DOB'].dt.strftime('%m/%d/%Y'))
 
@@ -36,3 +36,4 @@ print(f_kpi_CoinGecko)
 
 f_kpi_CoinGecko.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\Blockchain industry\CoinGeckoData\f_kpi_CoinGecko.csv', index=False)
 #Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id
+
