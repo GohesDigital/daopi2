@@ -49,9 +49,9 @@ d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/da
 df_list         = [KPIFramework,d_kpi,d_level0,d_level1,d_level2] #d_date
 df_list_l1      = [KPIFrameworkl1,d_kpi,d_level0,d_level1]
 
-KPIFrameworkl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFrameworkL1.csv', index=False)
+#KPIFrameworkl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFrameworkL1.csv', index=False)
 
-# dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=Truf1)e)
+# dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=True)
 # dff.drop(dff.filter(regex='level2').columns, axis=1, inplace=True)
 
 # dfflevel1 = dff.groupby('d_kpi_id').agg({'Denominator': 'sum', 'Numerator': 'sum'})
@@ -60,8 +60,9 @@ for i, x in zip(df_list_l1[1:], range(len(keysl1))):
     dfl1 = dfl1.merge(i, on=keysl1[x])
 
 dfl1["Period_int"] = pd.to_datetime(dfl1["Period_int"])
-
+print(dfl1)
 dfl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/dfl1.csv', index=False)
+
 
 df = df_list[0]
 for i,x in zip(df_list[1:],range(len(keys))):
