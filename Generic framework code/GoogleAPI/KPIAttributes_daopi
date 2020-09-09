@@ -1,0 +1,1 @@
+[{"Timestamp": "9/3/2020 11:38:23", "KPI ID": 1, "KPI Name": "Tweets", "KPI Description": "Number of tweets with a specific word in it", "KPI Image": "Twitterlogo", "Numerator KPI ID": 1, "Denominator KPI ID": "", "Is higher": "Positive", "Has cummulative relevance": "No", "Calculation": 1, "Notation": "#"}]

@@ -38,13 +38,11 @@ columnsdf1.remove('Denominator')
 columnsdf1.remove('Numerator_LP')
 columnsdf1.remove('Denominator_LP')
 
-#print(columnsd
-
 KPIFrameworkl1 = KPIFramework.groupby(columnsdf1,as_index=False).agg({'Denominator': 'sum', 'Numerator': 'sum', 'Denominator_LP': 'sum', 'Numerator_LP': 'sum'})
-print(KPIFrameworkl1)
 
 #KPIFramework    = pd.concat([KPIFrameworkDay, KPIFrameworkMonth,KPIFrameworkQuarter,KPIFrameworkYear])
-d_kpi           = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.xlsx',sheet_name='1'));  #, columns=['d_kpi_id', 'KPIName'], index_col=0)
+d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.csv", sep=';', index_col = False));
+#d_kpi           = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.xlsx',sheet_name='1'));  #, columns=['d_kpi_id', 'KPIName'], index_col=0)
 d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
 d_level1        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL1_ICON_Library.xlsx',sheet_name='1'));
 d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL2_ICON_Library.xlsx',sheet_name='1'));
@@ -68,9 +66,6 @@ dfl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic at
 df = df_list[0]
 for i,x in zip(df_list[1:],range(len(keys))):
     df = df.merge(i, on=keys[x])
-
-#minx = pd.datetime(df['Period_int'].min())#)df.eval(
-#print(minx)
 
 df["Period_int"] = pd.to_datetime(df["Period_int"])
 
@@ -128,22 +123,7 @@ layout = {'autosize': True,
           }
 
 
-#app.layout = html.Div(
-#    [dcc.Dropdown(
-#             id="Grain",
-#             options=[
-#             {'label': i, 'value': i} for i in KPIFramework.Grain.unique()
-#            ],
-#             multi=False,
-#             value='MonthName',
-#             className="dcc_control",
-#             ),
-#        html.Div(
-#            [dcc.Graph(id='graph-with-slider')
-#            ])
-#    ])
 
-app = dash.Dash(__name__)
 app.layout = html.Div(
         [html.Div([html.Div([html.H3(dcc.Dropdown(
                                     id="Level1NameSelect",
@@ -188,6 +168,18 @@ app.layout = html.Div(
                             ],
                             className="BlockchainImage",
                         ),
+                    ],
+                    ),
+                    html.Div([
+                        dcc.Tabs(id="tabs-styled-with-props", value='tab-1', children=[
+                            dcc.Tab(label='1', value='tab-1'),
+                            dcc.Tab(label='2', value='tab-2'),
+                        ], colors={
+                            "border": "white",
+                            "primary": "#949aa0",
+                            "background": "#949aa0"
+                        }),
+                        html.Div(id='tabs-content-props')
                     ],
                     ),
                     html.Div([html.Div([dcc.RadioItems(
@@ -281,8 +273,9 @@ className="dcc_control",
 style=
 #{'width': '48%', 'float': 'left', 'display': 'inline-block'}
 {'background-color': '#2a3642'
-}
-)
+})
+
+
 
 def CalculationLogic(Calculation):
     if Calculation==2:
@@ -341,6 +334,22 @@ def update_filter_l1(dfl1,GrainSelect,KPISelect,Level1NameSelect):  #,Level2Name
   #  & df["Level2Name"].isin(Level2NameSelect)
     ]
     return dff
+
+@app.callback(Output('tabs-content-props', 'children'),
+              [Input('tabs-styled-with-props', 'value')])
+def render_content(tab):
+    if tab == 'tab-1':
+        return html.Div([
+            html.H3('Tab content 1')
+        ],
+        style={'background-color': '#949aa0'},)
+    elif tab == 'tab-2':
+        return html.Div([
+            html.H3('Tab content 2')
+        ],
+        style = {'background-color': '#949aa0'},
+        )
+
 
 @app.callback(
     Output('graph-overall-time', 'figure'),

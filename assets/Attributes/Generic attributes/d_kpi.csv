@@ -15,6 +15,9 @@ d_kpi_id;KPICode;KPIName;KPIDescription;numerator_id;denominator_id;HigherIs(1=p
 14;#_Transactions_out;#_Transactions_out;#_Transactions_out;14;0;1;0;1;#
 15;#_Transactions;#_Transactions;#_Transactions;15;0;0;0;1;#
 16;#_Circulation;#_Circulation;#_Circulation;16;0;1;0;1;#
+17;$_Price;$_Price;$_Price;17;0;1;0;1;#
+18;$_Volume;$_Volume;$_Volume;18;0;1;0;1;#
+19;$_MarketCap;$_MarketCap;$_MarketCap;19;0;1;0;1;#
 ;;;;;;;;;
 ;;;;;;;;;
 ;;;;;;;;;

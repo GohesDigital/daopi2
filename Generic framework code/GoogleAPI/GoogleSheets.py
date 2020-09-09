@@ -10,15 +10,19 @@ credsgoogle = ServiceAccountCredentials.from_json_keyfile_name("credsgoogle.json
 
 client = gspread.authorize(credsgoogle)
 
-sheet = client.open("KPI Library").sheet1 # Open the spreadhseet
+Sheetlist=['KPI Library','Level 1 Library']
+FileList=['KPIAttributes_daopi.json','Level1Attributes_daopi.json']
+DimensionList=['d_kpi_daopi.csv','Level1Attributes_daopi.csv']
 
+for i,p,d in zip(Sheetlist,FileList,DimensionList):
+    sheet = client.open(i).sheet1    # Open the spreadhseet
 
-data = sheet.get_all_records()
+    data = sheet.get_all_records()
 
-pprint(data)
+    pprint(data)
 
-with open("KPIAttributes_daopi.json", "w") as outfile:
-    json.dump(data, outfile)
+    with open(p, "w") as outfile:
+        json.dump(data, outfile)
 
-df = pd.read_json (r'/Blockchain industry code/GoogleAPI/KPIAttributes_daopi.json')
-df.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes\d_kpi_daopi.csv', index = False)
+    df = pd.read_json(r'C:\Users\nickh\PycharmProjects\daopi2\Generic framework code\GoogleAPI/' + p  )
+    df.to_csv(r'C:\Users\nickh\PycharmProjects\daopi2\assets\Attributes/' + d, index = False)

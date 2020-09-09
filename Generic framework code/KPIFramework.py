@@ -7,7 +7,12 @@ from pprint import pprint
 #from datetime import datetime
 from openpyxl.workbook import Workbook
 import numpy as np
+#cs_list = ['f_kpi_id','d_target_id']
+#f_kpi_test          = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/f_kpi.csv", sep=';', index_col = False));
 
+#f_kpi_test = f_kpi_test.drop(columns=cs_list,axis=1)
+
+#f_kpi_test.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/f_kpi.csv', index=False)
 
 directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes'
 
@@ -16,15 +21,15 @@ directory = 'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic att
 
 #SQL Retrieve data
 
-Facts           = ['f_kpi_daopi','f_kpi_CoinGecko']
 
 #Dataframes Fact
 #f_kpi_test         = pd.read_sql("select Numerator,Denominator,d_kpi_id,d_level0_id,d_level1_id,d_level2_id,d_date_id from kpiframework.f_kpi", dbConnection);
-f_kpi               = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/f_kpi.csv", sep=';', index_col = False));
-f_kpi_daopi         = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Blockchain industry/f_kpi_daopi.csv", sep=';', index_col = False));
+f_kpi_test          = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/f_kpi.csv", sep=',', index_col = False));
+f_kpi_CoinGecko     = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Blockchain industry/CoinGeckoData/f_kpi_CoinGecko.csv", sep=',', index_col = False));
+
+Facts           = [f_kpi_test,f_kpi_CoinGecko]
 
 f_kpi = pd.concat(Facts)
-print(f_kpi_CoinGecko)
 
 #Dataframes Dimensions/attributes
 tmp_d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.csv", sep=';', index_col = False));
@@ -96,6 +101,9 @@ KPIFramework_LP = KPIFramework[['Row_id_lp','Numerator','Denominator']]
 KPIFramework = KPIFramework.merge(KPIFramework_LP, how='left',left_on=['Row_id'], right_on=['Row_id_lp'],suffixes = ("","_LP"))
 
 KPIFramework = KPIFramework.drop(columns=['Row_id_lp','Row_id_lp_LP','Row_id','Unnamed: 0'],axis=1)
-#print(KPIFramework.columns)
 
+print(KPIFramework.columns)
+
+print(KPIFramework)
 KPIFramework.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python.csv', index=False)
+

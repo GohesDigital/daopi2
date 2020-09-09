@@ -1,0 +1,2 @@
+Timestamp,KPI ID,KPI Name,KPI Description,KPI Image,Numerator KPI ID,Denominator KPI ID,Is higher,Has cummulative relevance,Calculation,Notation
+2020-09-03 11:38:23,1,Tweets,Number of tweets with a specific word in it,Twitterlogo,1,,Positive,No,1,#
