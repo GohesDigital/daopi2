@@ -69,6 +69,9 @@ for i,x in zip(df_list[1:],range(len(keys))):
     df = df.merge(i, on=keys[x])
 
 df["Period_int"] = pd.to_datetime(df["Period_int"])
+print(df)
+df.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/dfl.csv', index=False)
+
 
 KPINameList = df['KPIName'].unique()
 GrainNameList = df['Grain'].unique()
