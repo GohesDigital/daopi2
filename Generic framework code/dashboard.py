@@ -30,7 +30,6 @@ ListGrain       = ['int_day','int_month','int_quarter','int_year']
 
 KPIFramework         = pd.DataFrame(pd.read_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFramework_Python.csv'));
 
-
 columnsdf1 = KPIFramework.columns.tolist()
 columnsdf1.remove('d_level2_id')
 columnsdf1.remove('Numerator')
@@ -38,7 +37,18 @@ columnsdf1.remove('Denominator')
 columnsdf1.remove('Numerator_LP')
 columnsdf1.remove('Denominator_LP')
 
+columnsdf2 = KPIFramework.columns.tolist()
+columnsdf2.remove('Numerator')
+columnsdf2.remove('Denominator')
+columnsdf2.remove('Numerator_LP')
+columnsdf2.remove('Denominator_LP')
+
 KPIFrameworkl1 = KPIFramework.groupby(columnsdf1,as_index=False).agg({'Denominator': 'sum', 'Numerator': 'sum', 'Denominator_LP': 'sum', 'Numerator_LP': 'sum'})
+KPIFrameworkl2 = KPIFramework.groupby(columnsdf2,as_index=False).agg({'Denominator': 'sum', 'Numerator': 'sum', 'Denominator_LP': 'sum', 'Numerator_LP': 'sum'})
+
+KPIFrameworkl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFrameworkl1.csv', index=False)
+KPIFrameworkl2.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFrameworkl2.csv', index=False)
+
 
 #KPIFramework    = pd.concat([KPIFrameworkDay, KPIFrameworkMonth,KPIFrameworkQuarter,KPIFrameworkYear])
 d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/d_kpi.csv", sep=';', index_col = False));
@@ -46,40 +56,48 @@ d_kpi           = pd.DataFrame(pd.read_csv("C:/Users/nickh/PycharmProjects/daopi
 d_level0        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL0_Blockchain_Library.xlsx',sheet_name='1'));
 d_level1        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL1_ICON_Library.xlsx',sheet_name='1'));
 d_level2        = pd.DataFrame(pd.read_excel(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/LEVEL2_ICON_Library.xlsx',sheet_name='1'));
-df_list         = [KPIFramework,d_kpi,d_level0,d_level1,d_level2] #d_date
-df_list_l1      = [KPIFrameworkl1,d_kpi,d_level0,d_level1]
 
-#KPIFrameworkl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/KPIFrameworkL1.csv', index=False)
+df_list_l1      = [KPIFrameworkl1,d_kpi,d_level0,d_level1]
+df_list         = [KPIFrameworkl2,d_kpi,d_level0,d_level1,d_level2] #d_date
+
 
 # dff.drop(dff.filter(regex='Level2').columns, axis=1, inplace=True)
 # dff.drop(dff.filter(regex='level2').columns, axis=1, inplace=True)
 
 # dfflevel1 = dff.groupby('d_kpi_id').agg({'Denominator': 'sum', 'Numerator': 'sum'})
+
 dfl1 = df_list_l1[0]
 for i, x in zip(df_list_l1[1:], range(len(keysl1))):
     dfl1 = dfl1.merge(i, on=keysl1[x])
 
+
 dfl1["Period_int"] = pd.to_datetime(dfl1["Period_int"])
 print(dfl1)
+print(KPIFrameworkl1)
+print(dfl1.columns)
+
 dfl1.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/dfl1.csv', index=False)
 
 
-df = df_list[0]
-for i,x in zip(df_list[1:],range(len(keys))):
-    df = df.merge(i, on=keys[x])
+dfl2 = df_list[0]
+for g,t in zip(df_list[1:],range(len(keys))):
+    dfl2 = dfl2.merge(g, on=keys[t])
 
-df["Period_int"] = pd.to_datetime(df["Period_int"])
-print(df)
-df.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/dfl.csv', index=False)
+dfl2["Period_int"] = pd.to_datetime(dfl2["Period_int"])
+print(dfl2)
+print(KPIFrameworkl2)
+print(dfl2.columns)
+
+dfl2.to_csv(r'C:/Users/nickh/PycharmProjects/daopi2/assets/Attributes/Generic attributes/dfl2.csv', index=False)
 
 
-KPINameList = df['KPIName'].unique()
-GrainNameList = df['Grain'].unique()
-Level1NameList =  df['Level1Name'].unique()
-Level2NameList = df['Level2Name'].unique().tolist()
-#Level3NameList = df['Level3Name'].unique()
+KPINameList = dfl2['KPIName'].unique()
+GrainNameList = dfl2['Grain'].unique()
+Level1NameList =  dfl2['Level1Name'].unique()
+Level2NameList = dfl2['Level2Name'].unique().tolist()
+#Level3NameList = dfl2['Level3Name'].unique()
 
-#print(df.columns)
+#print(dfl2.columns)
 
 KPINameColor    = dict(d_kpi.set_index('d_kpi_id')['KPIName'].to_dict())
 Level0NameColor = dict(d_level0.set_index('LevelName')['Color'].to_dict())
@@ -87,7 +105,7 @@ Level1NameColor = dict(d_level1.set_index('Level1Name')['Level1Color'].to_dict()
 Level2NameColor = dict(d_level2.set_index('Level2Name')['Level2Color'].to_dict())
 #Level3NameColor = dict(d_level3.set_index('d_level3_id')['Level3Name'].to_dict())
 
-#df['Level1Color'] = df['Level1Color'].apply(lambda x: "'" + str(x) + "'")
+#dfl2['Level1Color'] = dfl2['Level1Color'].apply(lambda x: "'" + str(x) + "'")
 
 items = [
     dbc.DropdownMenuItem("First"),
@@ -321,12 +339,12 @@ def NotationDEF(Notation):
 #print(y)
 #print(KPIFramework['Numerator'])
 
-def update_filter(df,GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect):
-    dff= df[
-      (df["Grain"] == GrainSelect)
-    & (df["KPIName"] == KPISelect)
-    & (df["Level1Name"] == Level1NameSelect)
-    & df["Level2Name"].isin(Level2NameSelect)
+def update_filter(dfl2,GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect):
+    dff= dfl2[
+      (dfl2["Grain"] == GrainSelect)
+    & (dfl2["KPIName"] == KPISelect)
+    & (dfl2["Level1Name"] == Level1NameSelect)
+    & dfl2["Level2Name"].isin(Level2NameSelect)
     ]
     return dff
 
@@ -371,7 +389,7 @@ def update_mainfigure(GrainSelect,KPISelect,Level1NameSelect,DBColorVar):   #,Le
     DBColor = DBColorDEF(DBColorVar)
     Notation = NotationDEF(str(dff.Notation.unique()[0]))
     Calculation = dff.Calculation.unique()[0]
-    for i in df.Level1Name.unique():
+    for i in dfl2.Level1Name.unique():
         df_by_Level1Name = dff[dff['Level1Name'] == i]
         y = eval(CalculationLogic2(Calculation))
         traces3.append(dict(
@@ -483,14 +501,14 @@ def update_mainfigure(GrainSelect,KPISelect,Level1NameSelect,DBColorVar):   #,Le
 )
 
 def update_figure(GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect,DBColorVar):
-    dff = update_filter(df, GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect)
+    dff = update_filter(dfl2, GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect)
     traces = []
     DBColor = DBColorDEF(DBColorVar)
     Notation = NotationDEF(str(dff.Notation.unique()[0]))
     #KPIName = str(eval(KPISelect))
     Level2Entitytype = str(dff.Level2Entitytype.unique()[0])
     Calculation = dff.Calculation.unique()[0]
-    for i in df.Level2Name.unique():
+    for i in dfl2.Level2Name.unique():
         df_by_Level2Name = dff[dff['Level2Name'] == i]
         #Calculation = df_by_Level2Name.Calculation.unique()[0]
         y = eval(CalculationLogic(Calculation))
@@ -601,10 +619,10 @@ def update_figure(GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect,DBColo
 )
 
 def update_level2Graph(GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect,DBColorVar):
-    dff = update_filter(df, GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect)
+    dff = update_filter(dfl2, GrainSelect,KPISelect,Level1NameSelect,Level2NameSelect)
     traces2 = []
     DBColor = DBColorDEF(DBColorVar)
-    for i in df.Level2Name.unique():
+    for i in dfl2.Level2Name.unique():
         df_by_Level2Name = dff[dff['Level2Name'] == i]
         traces2.append(dict(
             y=df_by_Level2Name['Level2Name'],
