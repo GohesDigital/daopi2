@@ -1,0 +1,1 @@
+Plotly.newPlot('myDiv', data, layout, {modeBarButtonsToRemove: ['toImage']})

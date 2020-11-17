@@ -1,20 +1,16 @@
-d_kpi_id;KPICode;KPIName;KPIDescription;numerator_id;denominator_id;HigherIs(1=positive);IsCum;Calculation;Notation
-1;#_SelfStaked;#_SelfStaked;#_SelfStaked;1;0;1;0;1;#
-2;%_StakeHealth;%_StakeHealth;%_StakeHealth;1;5;0;0;2;%
-3;%_Top5_Staked;%_Top5_Staked;%_Top5_Staked;5;9;0;0;2;%
-4;%_Top10_Staked;%_Top10_Staked;%_Top10_Staked;6;9;0;0;2;%
-5;#_Top5_Staked;#_Top5_Staked;#_Top5_Staked;5;0;1;0;1;#
-6;#_Top10_Staked;#_Top10_Staked;#_Top10_Staked;6;0;1;0;1;#
-7;#_ICONISTS_Staked;#_ICONISTS_Staked;#_ICONISTS_Staked;7;0;1;0;1;#
-8;#_Locked;#_Locked;#_Locked;8;0;0;0;1;#
-9;#_Staked;#_Staked;#_Staked;9;0;0;0;1;#
-10;#_Owned;#_Owned;#_Owned;10;0;0;0;1;#
-11;%_Staked;%_Staked;%_Staked;9;0;0;0;2;%
-12;#_PREPS_Staked;#_PREPS_Staked;#_PREPS_Staked;12;0;0;0;1;#
-13;#_Transactions_in;#_Transactions_in;#_Transactions_in;13;0;1;0;1;#
-14;#_Transactions_out;#_Transactions_out;#_Transactions_out;14;0;1;0;1;#
-15;#_Transactions;#_Transactions;#_Transactions;15;0;0;0;1;#
-16;#_Circulation;#_Circulation;#_Circulation;16;0;1;0;1;#
-17;$_Price;$_Price;$_Price;17;0;1;0;1;#
-18;$_Volume;$_Volume;$_Volume;18;0;1;0;1;#
-19;$_MarketCap;$_MarketCap;$_MarketCap;19;0;1;0;1;#
+d_kpi_id;KPICode;KPIName;KPIDescription;numerator_id;denominator_id;HigherIs(1=positive);IsCum;Calculation;Notation;AggregateNum;AggregateDenom;Level0_Attribuut;Level1_Attribuut;Level2_Attribuut;Level3_Attribuut;KPIImage
+1;#_SelfStaked;number of selfstaked;#_SelfStaked;1;0;1;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+2;%_StakeHealth;percentage stake health;%_StakeHealth;1;5;0;0;2;%;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+3;%_Top5_Staked;percentage top 5 staked;%_Top5_Staked;5;9;0;0;2;%;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+4;%_Top10_Staked;percentage top 10 staked;%_Top10_Staked;6;9;0;0;2;%;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+5;#_Top5_Staked;number of top 5 staked;#_Top5_Staked;5;0;1;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+6;#_Top10_Staked;number of top 10 staked;#_Top10_Staked;6;0;1;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+7;#_ICONISTS_Staked;number of iconists who staked;#_ICONISTS_Staked;7;0;1;0;1;#;1;;Blockchain Space;Blockchain;P-Reps;Dapps;
+8;#_Locked;#_Locked;number of locked;8;0;0;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+9;#_Staked;#_Staked;number staked;9;0;0;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+10;#_Owned;#_Owned;number owned;10;0;0;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+11;%_Staked;%_Staked;percentage staked;9;0;0;0;2;%;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+16;#_Circulation;circulation;#_Circulation;16;0;1;0;1;#;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+17;$_Price;price;price;17;0;1;0;1;$;3;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+18;$_Volume;volume;Volume;18;0;1;0;1;$;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
+19;$_MarketCap;marketCap;$_MarketCap;19;0;1;0;1;$;1;1;Blockchain Space;Blockchain;P-Reps;Dapps;
